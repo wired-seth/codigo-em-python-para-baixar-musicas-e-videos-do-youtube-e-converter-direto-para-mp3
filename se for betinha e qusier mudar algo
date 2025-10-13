@@ -1,0 +1,30 @@
+import yt_dlp
+
+def baixar_playlist(link, pasta_destino="."):
+    opcoes = {
+        "format": "bestaudio/best",
+        "outtmpl": f"{pasta_destino}/%(playlist_title)s/%(title)s.%(ext)s",
+        "ignoreerrors": True, 
+        "postprocessors": [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "192",
+            }
+        ],
+        "noplaylist": False, 
+        "quiet": False, 
+        "progress_hooks": [
+            lambda d: print(f"🎧 Baixando: {d.get('filename', '')}") if d['status'] == 'downloading' else None
+        ],
+    }
+
+    with yt_dlp.YoutubeDL(opcoes) as ydl:
+        ydl.download([link])
+
+if __name__ == "__main__":
+    link = input("Cole o link da playlist ou vídeo do YouTube: ").strip()
+    baixar_playlist(link)
+    print("\n Download concluído!")
+
+    #euamoelasepa
