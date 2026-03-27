@@ -4,7 +4,7 @@ def baixar_playlist(link, pasta_destino="."):
     opcoes = {
         "format": "bestaudio/best",
         "outtmpl": f"{pasta_destino}/%(playlist_title)s/%(title)s.%(ext)s",
-        "ignoreerrors": True,  # continua mesmo que algum vídeo falhe
+        "ignoreerrors": True,
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",
@@ -12,10 +12,10 @@ def baixar_playlist(link, pasta_destino="."):
                 "preferredquality": "192",
             }
         ],
-        "noplaylist": False,  # garante que playlists inteiras sejam baixadas
-        "quiet": False,  # mostra progresso
+        "noplaylist": False, 
+        "quiet": False,  
         "progress_hooks": [
-            lambda d: print(f"🎧 Baixando: {d.get('filename', '')}") if d['status'] == 'downloading' else None
+            lambda d: print(f"Baixando: {d.get('filename', '')}") if d['status'] == 'downloading' else None
         ],
     }
 
@@ -25,4 +25,4 @@ def baixar_playlist(link, pasta_destino="."):
 if __name__ == "__main__":
     link = input("Cole o link da playlist ou vídeo do YouTube: ").strip()
     baixar_playlist(link)
-    print("\n✅ Download concluído! As músicas foram salvas em pastas separadas.")
+    print("\nDownload concluído!")
